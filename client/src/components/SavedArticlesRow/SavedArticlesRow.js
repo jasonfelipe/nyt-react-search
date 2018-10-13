@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const ArticlesRow = props =>
+const SavedArticlesRow = props =>
 
     <div>
         {props.articles.map((result, index )=> (
@@ -15,9 +15,9 @@ const ArticlesRow = props =>
                 <a target="_blank" className='btn btn-success' href={result.articleUrl}>
                     Link to Article
                 </a>
-                <button className='btn btn-primary' onClick={() => {props.handleSave(result)}}>Save </button>
+                <button className='btn btn-danger' onClick={() => {props.handleDelete(result.articleHeadline)}}>Delete</button>
             </ul>
         ))}
     </div>
 
-export default ArticlesRow
+export default SavedArticlesRow

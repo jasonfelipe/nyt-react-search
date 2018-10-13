@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from '../../components/Jumbotron';
 import API from "../../utils/API";
 import Row from "../../components/Row";
 import Container from "../../components/Container";
 import ArticlesRow from "../../components/ArticlesRow";
+import SavedArticlesRow from "../../components/SavedArticlesRow/SavedArticlesRow";
 
 
 class Articles extends Component {
@@ -28,7 +28,9 @@ class Articles extends Component {
     loadSavedArticles = () => {
         API.getSavedArticles()
             .then(res => {
-                console.log("loaded articles: " + res);
+                this.setState({
+                    saved: res.data
+                })
             })
             .catch(err => console.log(err));
     }
@@ -109,9 +111,8 @@ class Articles extends Component {
                     <h3 className='text-center'>SAVED ARTICLES</h3>
                     {this.state.saved.length ? (
                         <Row>
-                            <ArticlesRow articles={this.state.saved}>
-                                <DeleteBtn onClick={this.handleDelete} />
-                            </ArticlesRow>
+                            <SavedArticlesRow handleDelete={this.handleDelete} articles={this.state.saved}>
+                            </SavedArticlesRow>
                         </Row>) : (
                             <h3 style={{color: 'red'}}className='text-center'>No Saved Articles Found</h3>
                         )}
